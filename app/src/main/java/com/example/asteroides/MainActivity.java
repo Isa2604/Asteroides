@@ -27,38 +27,38 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //ANIMACIONES
-//        TextView myTextView = findViewById(R.id.miTextView);
-//        Animation giroConZoom = AnimationUtils.loadAnimation(this,
-//                R.anim.giro_con_zoom);
-//        myTextView.startAnimation(giroConZoom);
-//        Button Button01 = findViewById(R.id.Button01);
-//        Animation aparecer = AnimationUtils.loadAnimation(this,
-//                R.anim.aparecer);
-//        Button01.startAnimation(aparecer);
-//        Button Button02 = findViewById(R.id.Button02);
-//        Animation desplazamientoDerecha = AnimationUtils.loadAnimation(this,
-//                R.anim.desplazamiento_derecha);
-//        Button02.startAnimation(desplazamientoDerecha);
-//
-//        Button tercerBoton = findViewById(R.id.Button03);
-//        Animation rotacion = AnimationUtils.loadAnimation(this,
-//                R.anim.rotacion);
-//        tercerBoton.startAnimation(rotacion);
-//        Animation giroZoom = AnimationUtils.loadAnimation(this, R.anim.giro_con_zoom);
-//
-//        tercerBoton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                v.startAnimation(giroZoom);
-//                lanzarAcercaDe(v);
-//            }
-//        });
-//
-//        Button cuartoBoton = findViewById(R.id.Button04);
-//        Animation escalado = AnimationUtils.loadAnimation(this,
-//                R.anim.escalado);
-//        cuartoBoton.startAnimation(escalado);
-//        //---------------------------------
+        TextView myTextView = findViewById(R.id.miTextView);
+        Animation giroConZoom = AnimationUtils.loadAnimation(this,
+                R.anim.giro_con_zoom);
+        myTextView.startAnimation(giroConZoom);
+        Button Button01 = findViewById(R.id.Button01);
+        Animation aparecer = AnimationUtils.loadAnimation(this,
+                R.anim.aparecer);
+        Button01.startAnimation(aparecer);
+        Button Button02 = findViewById(R.id.Button02);
+        Animation desplazamientoDerecha = AnimationUtils.loadAnimation(this,
+                R.anim.desplazamiento_derecha);
+        Button02.startAnimation(desplazamientoDerecha);
+
+        Button tercerBoton = findViewById(R.id.Button03);
+        Animation rotacion = AnimationUtils.loadAnimation(this,
+                R.anim.rotacion);
+        tercerBoton.startAnimation(rotacion);
+        Animation giroZoom = AnimationUtils.loadAnimation(this, R.anim.giro_con_zoom);
+
+        tercerBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(giroZoom);
+                lanzarAcercaDe(v);
+            }
+        });
+
+        Button cuartoBoton = findViewById(R.id.Button04);
+        Animation escalado = AnimationUtils.loadAnimation(this,
+                R.anim.escalado);
+        cuartoBoton.startAnimation(escalado);
+        //---------------------------------
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

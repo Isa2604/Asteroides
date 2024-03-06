@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Asteroides"
-include("app")
+include(":app")
  
