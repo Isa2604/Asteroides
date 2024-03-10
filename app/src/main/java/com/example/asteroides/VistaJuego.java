@@ -15,6 +15,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,55 +43,99 @@ public class VistaJuego extends View implements SensorEventListener {
        usarSensores = pref.getBoolean("pref_key_usar_sensores", true);
 
         //ASTEROIDES
-        if (pref.getString("graficos", "1").equals("0")) {
+        if (pref.getString("graficos", "1").equals("3")) {
+            // Utilizar VectorDrawable
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Path pathAsteroide = new Path();
-            pathAsteroide.moveTo((float) 0.3, (float) 0.0);
-            pathAsteroide.lineTo((float) 0.6, (float) 0.0);
-            pathAsteroide.lineTo((float) 0.6, (float) 0.3);
-            pathAsteroide.lineTo((float) 0.8, (float) 0.2);
-            pathAsteroide.lineTo((float) 1.0, (float) 0.4);
-            pathAsteroide.lineTo((float) 0.8, (float) 0.6);
-            pathAsteroide.lineTo((float) 0.9, (float) 0.9);
-            pathAsteroide.lineTo((float) 0.8, (float) 1.0);
-            pathAsteroide.lineTo((float) 0.4, (float) 1.0);
-            pathAsteroide.lineTo((float) 0.0, (float) 0.6);
-            pathAsteroide.lineTo((float) 0.0, (float) 0.2);
-            pathAsteroide.lineTo((float) 0.3, (float) 0.0);
-            ShapeDrawable dAsteroide = new ShapeDrawable(
-                    new PathShape(pathAsteroide, 1, 1));
-            dAsteroide.getPaint().setColor(Color.WHITE);
-            dAsteroide.getPaint().setStyle(Paint.Style.STROKE);
-            dAsteroide.setIntrinsicWidth(50);
-            dAsteroide.setIntrinsicHeight(50);
-            drawableAsteroide = dAsteroide;
-            setBackgroundColor(Color.BLACK);
+            /// Obtener el nombre del recurso vectorial según el tamaño
+            String tamanoAsteroides = "a"; // Puedes ajustar este valor según tus necesidades
+            String nombreRecurso = tamanoAsteroides;
+            int vectorDrawableResourceId = getResources().getIdentifier(nombreRecurso, "drawable", context.getPackageName());
+            // Verificar si el recurso vectorial existe antes de intentar cargarlo
+            if (vectorDrawableResourceId != 0) {
+                // Utilizar un recurso vectorial existente
+                drawableAsteroide = AppCompatResources.getDrawable(context, vectorDrawableResourceId);
+                setBackgroundColor(Color.BLACK);
+            } else {
+                Log.e("VistaJuego", "Recurso vectorial no encontrado para " + nombreRecurso);
+                drawableAsteroide = AppCompatResources.getDrawable(context, R.drawable.asteroide1);
+            }
         } else {
+            // Utilizar Bitmap (o ShapeDrawable, según tu necesidad)
             setLayerType(View.LAYER_TYPE_HARDWARE, null);
-            drawableAsteroide =
-                    AppCompatResources.getDrawable(context, R.drawable.asteroide1);
+
+            if (pref.getString("graficos", "1").equals("0")) {
+                setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                Path pathAsteroide = new Path();
+                pathAsteroide.moveTo((float) 0.3, (float) 0.0);
+                pathAsteroide.lineTo((float) 0.6, (float) 0.0);
+                pathAsteroide.lineTo((float) 0.6, (float) 0.3);
+                pathAsteroide.lineTo((float) 0.8, (float) 0.2);
+                pathAsteroide.lineTo((float) 1.0, (float) 0.4);
+                pathAsteroide.lineTo((float) 0.8, (float) 0.6);
+                pathAsteroide.lineTo((float) 0.9, (float) 0.9);
+                pathAsteroide.lineTo((float) 0.8, (float) 1.0);
+                pathAsteroide.lineTo((float) 0.4, (float) 1.0);
+                pathAsteroide.lineTo((float) 0.0, (float) 0.6);
+                pathAsteroide.lineTo((float) 0.0, (float) 0.2);
+                pathAsteroide.lineTo((float) 0.3, (float) 0.0);
+
+                ShapeDrawable dAsteroide = new ShapeDrawable(
+                        new PathShape(pathAsteroide, 1, 1));
+                dAsteroide.getPaint().setColor(Color.WHITE);
+                dAsteroide.getPaint().setStyle(Paint.Style.STROKE);
+                dAsteroide.setIntrinsicWidth(100);
+                dAsteroide.setIntrinsicHeight(100);
+                drawableAsteroide = dAsteroide;
+                setBackgroundColor(Color.BLACK);
+            } else {
+                // Utilizar Bitmap
+                drawableAsteroide = AppCompatResources.getDrawable(context, R.drawable.asteroide1);
+            }
         }
+
         //NAVE
-        if (pref.getString("graficos", "1").equals("0")) {
+        if (pref.getString("graficos", "1").equals("3")) {
+            // Utilizar VectorDrawable
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            Path pathNave = new Path();
-            pathNave.moveTo(0.0f, 0.0f);
-            pathNave.lineTo(20.0f, 7.5f);
-            pathNave.lineTo(0.0f, 15.0f);
-            pathNave.lineTo(0.0f, 0.0f);
-            ShapeDrawable dNave = new ShapeDrawable(
-                    new PathShape(pathNave, 20, 15));
-            dNave.getPaint().setColor(Color.WHITE);
-            dNave.getPaint().setStyle(Paint.Style.STROKE);
-            dNave.setIntrinsicWidth(50);
-            dNave.setIntrinsicHeight(50);
-            drawableNave = dNave;
-            setBackgroundColor(Color.BLACK);
+            /// Obtener el nombre del recurso vectorial según el tamaño
+            String escogeNave = "navee"; // Puedes ajustar este valor según tus necesidades
+            String nombreRecurso = escogeNave;
+            int vectorDrawableResourceId = getResources().getIdentifier(nombreRecurso, "drawable", context.getPackageName());
+            // Verificar si el recurso vectorial existe antes de intentar cargarlo
+            if (vectorDrawableResourceId != 0) {
+                // Utilizar un recurso vectorial existente
+                drawableNave = AppCompatResources.getDrawable(context, vectorDrawableResourceId);
+                setBackgroundColor(Color.BLACK);
+            } else {
+                Log.e("VistaJuego", "Recurso vectorial no encontrado para " + nombreRecurso);
+                drawableNave = AppCompatResources.getDrawable(context, R.drawable.nave);
+            }
         } else {
+            // Utilizar Bitmap (o ShapeDrawable, según tu necesidad)
             setLayerType(View.LAYER_TYPE_HARDWARE, null);
-            drawableNave =
-                    AppCompatResources.getDrawable(context, R.drawable.nave);
+            if (pref.getString("graficos", "1").equals("0")) {
+                setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+                Path pathNave = new Path();
+                pathNave.moveTo(0.0f, 0.0f);
+                pathNave.lineTo(20.0f, 7.5f);
+                pathNave.lineTo(0.0f, 15.0f);
+                pathNave.lineTo(0.0f, 0.0f);
+                ShapeDrawable dNave = new ShapeDrawable(
+                        new PathShape(pathNave, 20, 15));
+                dNave.getPaint().setColor(Color.WHITE);
+                dNave.getPaint().setStyle(Paint.Style.STROKE);
+                dNave.setIntrinsicWidth(50);
+                dNave.setIntrinsicHeight(50);
+                drawableNave = dNave;
+                setBackgroundColor(Color.BLACK);
+            } else {
+                setLayerType(View.LAYER_TYPE_HARDWARE, null);
+                drawableNave =
+                        AppCompatResources.getDrawable(context, R.drawable.nave);
+
+            }
         }
+
         //MISIL
         if (pref.getString("graficos", "1").equals("0")) {
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
